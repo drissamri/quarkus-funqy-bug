@@ -3,14 +3,9 @@ service: hello-service2
 provider:
   name: aws
   region: eu-central-1
-  stage: dev
-  deploymentBucket:
-    name: telenet-ent-cbe-deployments
 
   logRetentionInDays: 7
   versionFunctions: false
-  httpApi:
-    payload: '2.0'
 
   apiGateway:
     binaryMediaTypes:

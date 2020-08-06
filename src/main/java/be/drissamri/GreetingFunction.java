@@ -1,5 +1,7 @@
 package be.drissamri;
 
+import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyRequestEvent;
+import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyResponseEvent;
 import com.amazonaws.services.lambda.runtime.events.APIGatewayV2HTTPEvent;
 import com.amazonaws.services.lambda.runtime.events.APIGatewayV2HTTPResponse;
 import io.quarkus.funqy.Funq;
@@ -22,12 +24,13 @@ public class GreetingFunction {
     }
 
     @Funq("world")
-    public APIGatewayV2HTTPResponse world(APIGatewayV2HTTPEvent event) {
+    public APIGatewayProxyResponseEvent world(APIGatewayProxyRequestEvent event) {
         LOG.error("Request: {}", event);
-        return APIGatewayV2HTTPResponse.builder()
-                .withBody("Hello World!")
-                .withStatusCode(200)
-                .withHeaders(Map.of("Content-Type", "application/json"))
-                .build();
+        APIGatewayProxyResponseEvent response = new APIGatewayProxyResponseEvent();
+        response.setBody("Hello World!");
+        response.setStatusCode(200);
+        response.setHeaders(Map.of("Content-Type", "application/json"));
+
+        return response;
     }
 }
