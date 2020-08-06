@@ -13,20 +13,19 @@
       Properties:
         Handler: io.quarkus.amazon.lambda.runtime.QuarkusStreamHandler::handleRequest
         Runtime: java11
-        CodeUri: function.zip
-        MemorySize: 512
+        CodeUri: target/function.zip
+        MemorySize: 3008
         Policies: AWSLambdaBasicExecutionRole
-        Timeout: 15
+        Timeout: 5
         Events:
-          GetResource:
+          HelloResource:
             Type: Api
             Properties:
-              Path: /{proxy+}
-              Method: any
+              Path: /hello
+              Method: POST
 
-  Outputs:
-    HelloApi:
-      Description: URL for application
-      Value: !Sub 'https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/'
-      Export:
-        Name: HelloApi
+          WorldResource:
+            Type: Api
+            Properties:
+              Path: /world
+              Method: POST

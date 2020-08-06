@@ -1,4 +1,8 @@
-	
+
+sam package --template-file template.yaml --output-template-file packaged.yaml --s3-bucket <bucket>
+sam deploy --template-file packaged.yaml --capabilities CAPABILITY_IAM --stack-name HelloWorldStack
+aws cloudformation delete-stack --stack-name HelloWorldStack
+
 curl --location --request POST 'https://xyz.execute-api.eu-central-1.amazonaws.com/dev/hello' \
 --header 'Content-Type: application/json' \
 --data-raw '{
