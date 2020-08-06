@@ -1,0 +1,34 @@
+service: hello-service2
+
+provider:
+  name: aws
+  region: eu-central-1
+  stage: dev
+  deploymentBucket:
+    name: telenet-ent-cbe-deployments
+
+  logRetentionInDays: 7
+  versionFunctions: false
+  httpApi:
+    payload: '2.0'
+
+  apiGateway:
+    binaryMediaTypes:
+      - '*/*'
+
+package:
+  artifact: 'target/function.zip'
+
+functions:
+  hello:
+    handler: io.quarkus.amazon.lambda.runtime.QuarkusStreamHandler::handleRequest
+    runtime: java11
+    memorySize: 3008
+    timeout: 10
+    events:
+      - http:
+          path: /hello
+          method: POST
+      - http:
+          path: /world
+          method: POST

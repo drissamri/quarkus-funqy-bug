@@ -1,0 +1,12 @@
+{
+  "name": "hello-service",
+  "version": "1.0.0",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "license": "ISC",
+  "devDependencies": {
+    "serverless": "1.78.1",
+    "serverless-domain-manager": "4.2.0"
+  }
+}
