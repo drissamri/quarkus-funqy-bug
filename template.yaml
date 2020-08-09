@@ -21,11 +21,11 @@
           HelloResource:
             Type: Api
             Properties:
-              Path: /hello
+              Path: /v1/hello
               Method: POST
 
           WorldResource:
-            Type: Api
+            Type: HttpApi
             Properties:
-              Path: /world
+              Path: /v2/hello
               Method: POST

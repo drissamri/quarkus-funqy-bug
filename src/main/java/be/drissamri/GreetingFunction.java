@@ -13,24 +13,16 @@ import java.util.Map;
 public class GreetingFunction {
     private Logger LOG = LoggerFactory.getLogger(GreetingFunction.class);
 
-    @Funq("hello")
-    public APIGatewayV2HTTPResponse hello(APIGatewayV2HTTPEvent event) {
-        LOG.error("Request: {}", event);
-        return APIGatewayV2HTTPResponse.builder()
-                .withBody("Hello!")
-                .withStatusCode(200)
-                .withHeaders(Map.of("Content-Type", "application/json"))
-                .build();
+    @Funq("v1/hello")
+    public String world(APIGatewayProxyRequestEvent event) {
+        LOG.error("Request : {}", event);
+        return "REST API input: " + event.getBody();
     }
 
-    @Funq("world")
-    public APIGatewayProxyResponseEvent world(APIGatewayProxyRequestEvent event) {
-        LOG.error("Request: {}", event);
-        APIGatewayProxyResponseEvent response = new APIGatewayProxyResponseEvent();
-        response.setBody("Hello World!");
-        response.setStatusCode(200);
-        response.setHeaders(Map.of("Content-Type", "application/json"));
+    @Funq("v2/hello")
+    public String hello(APIGatewayV2HTTPEvent event) {
+        LOG.error("Request : {}", event);
+        return "HTTP API input: " + event.getBody();
 
-        return response;
     }
 }
