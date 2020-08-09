@@ -21,11 +21,12 @@
           HelloResource:
             Type: Api
             Properties:
-              Path: /v1/hello
+              Path: /world
               Method: POST
 
-          WorldResource:
-            Type: HttpApi
-            Properties:
-              Path: /v2/hello
-              Method: POST
+  Outputs:
+    HelloApi:
+      Description: URL for application
+      Value: !Sub 'https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/'
+      Export:
+        Name: HelloApi
